@@ -1,0 +1,30 @@
+
+<div class="container">
+    <form [formGroup] = "loginForm">
+      <h3>{{tituloLogin}}</h3>
+      
+      <div class="row mb-3" style="margin-top: 15px;">
+        
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Login</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="login" name="login" formControlName= "login">
+          <div *ngIf="loginForm.get('login')?.errors" style="font-size: 9px; color: brown">campo obrigatório</div>
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Senha</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="senha" name="senha" formControlName= "senha">
+          <div *ngIf="loginForm.get('senha')?.errors" style="font-size: 9px; color: brown">campo obrigatório</div>
+          
+        </div>
+        
+        <div class="row mb-3" style="margin-top: 5%;">
+      <button type="submit" class="btn btn-primary" (click)="fazerLogin()" [disabled] = "!loginForm.valid" >Entrar</button>
+      <button type="submit" class="btn btn-primary" style="margin-top: 10px;" (click)="recuperarSenha()" >Recuperar</button>
+        </div>
+      </div>
+    </form>
+    </div>
