@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from '../../sevices/login.service';
+import { LoginService } from '../../services/login.service';
 import { Usuario } from '../../model/usuario';
 
 
@@ -16,9 +16,6 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private loginService: LoginService) {
 
   }
-
-
-
 
   /* Pegando os dados do formulário */
   loginForm = this.fb.group({

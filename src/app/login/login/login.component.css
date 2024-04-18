@@ -1,0 +1,21 @@
+
+
+.btn-extra-small {
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+
+  }
+
+  .container {
+    display: flex;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    height: 80vh; /* Define a altura para ocupar toda a altura da viewport */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
