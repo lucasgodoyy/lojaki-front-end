@@ -36,7 +36,7 @@ export class LoginService {
 
         alert('Login realizado')
 
-          this.router.navigate(['home']);
+        this.router.navigate(['home']);
 
       },
 
@@ -70,5 +70,12 @@ export class LoginService {
     })
   }
 
+
+  deslogarMetodo(): void {
+    localStorage.setItem("Authorization", '');
+    localStorage.setItem("username", '');
+
+    this.router.navigate(['login']);
+  }
 
 }

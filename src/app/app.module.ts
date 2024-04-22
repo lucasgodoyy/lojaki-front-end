@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 import { guardianGuard } from './guard/guardian.guard';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -28,7 +29,8 @@ export const routes = RouterModule.forRoot(appRoutes)
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

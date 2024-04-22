@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-
-
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
 
   }
+
+  userLogado() {
+
+    return this.loginService.usuarioLogado()
+  }
+
 
 
   ngOnInit(): void {
