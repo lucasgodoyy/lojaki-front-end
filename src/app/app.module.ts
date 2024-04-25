@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 import { guardianGuard } from './guard/guardian.guard';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CategoriaProdutoComponent } from './components/categoria-produto/categoria-produto.component';
+import { CategoriaProdutoService } from './services/categoria-produto.service';
+import { LoginService } from './services/login.service';
 
 
 
@@ -20,7 +23,8 @@ export const appRoutes : Routes = [
 
 {path: 'login', component : LoginComponent},
 {path: '', component : AppComponent},
-{path: 'home', component : HomeComponent, canActivate:[guardianGuard], data: {role:['ROLE_ADMIN','ROLE_USER']}}
+{path: 'home', component : HomeComponent, canActivate:[guardianGuard], data: {role:['ROLE_ADMIN','ROLE_USER']}},
+{path: 'categoria-produto', component: CategoriaProdutoComponent, canActivate:[guardianGuard], data: {role:['ROLE_ADMIN','ROLE_USER']}}
 ];
 
 export const routes = RouterModule.forRoot(appRoutes)
@@ -30,16 +34,21 @@ export const routes = RouterModule.forRoot(appRoutes)
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    CategoriaProdutoComponent
+
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-  
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: interceptorLojakiInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: interceptorLojakiInterceptor, multi: true},
+
+  ],
+ 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

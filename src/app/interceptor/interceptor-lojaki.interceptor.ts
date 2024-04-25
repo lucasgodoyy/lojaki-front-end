@@ -17,21 +17,15 @@ export class interceptorLojakiInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.info('interceptor acionado')
 
     var authorization = localStorage.getItem('Authorization')
 
     if (authorization !== '' && authorization !== null && authorization !== 'null') {
-
-      
-      console.info('Token: ' + authorization)
-
-
       const autRequ = request.clone({
         headers: request.headers.set('Authorization', authorization)
 
       })
-        return next.handle(autRequ)
+      return next.handle(autRequ)
     }
 
     return next.handle(request)

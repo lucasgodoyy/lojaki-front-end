@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../model/usuario';
 import { Route, Router } from '@angular/router';
+import { PessoaJuridica } from '../model/pessoa-juridica';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,18 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) {
 
   }
+
+  codEmpresa(){
+    return localStorage.getItem('Empresa');
+  }
+
+
+  objetoEmpresa(): PessoaJuridica{
+    return new PessoaJuridica(Number(this.codEmpresa()));
+    
+  }
+
+
 
   usuarioLogado() {
 
@@ -33,6 +46,8 @@ export class LoginService {
         var jwt = JSON.parse(respJson)
         localStorage.setItem("Authorization", jwt.Authorization)
         localStorage.setItem("Username", jwt.username)
+        localStorage.setItem("Empresa", jwt.empresa)
+
 
         alert('Login realizado')
 

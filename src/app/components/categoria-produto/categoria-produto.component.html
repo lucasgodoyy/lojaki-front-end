@@ -1,0 +1,58 @@
+<p style="text-align: center;font-weight: bold;font-size: 15px;">Cadastro de categoria de produto</p>
+
+<form class="row g-3" [formGroup]="catProdForm">
+
+    <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
+
+
+    <div class="col-2">
+        <label for="id" class="form-label">ID:</label>
+        <input type="text" class="form-control" id="id" readonly name="id" placeholder="ID" formControlName="id">
+    </div>
+    <div class="col-10">
+        <label for="nomeDesc" class="form-label">Nome da categoria</label>
+        <input type="text" maxlength="100" class="form-control" id="nomeDesc" name="nomeDesc" required
+            placeholder="Nome da categoria" formControlName="nomeDesc">
+        <div *ngIf="catProdForm.get('nomeDesc')?.errors" style="font-size: 8px;color: brown;">* Nome da categoria</div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" [disabled]="!catProdForm.valid"
+            (click)="cadastrarCp()" [disabled]="!catProdForm.valid ">Salvar</button>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px;"
+            [disabled]="!catProdForm.valid" (click)="novo()">Novo</button>
+    </div>
+</form>
+
+<form class="row g-3">
+    <label for="pesquisa" class="form-label" >Pesquisar</label>
+    <div class="col-10">
+        <input type="text" #pesquisa  (keydown.enter)="pesquisar(pesquisa.value)" class="form-control"  id="pesquisa" name="pesquisa"  placeholder="Nome da categoria para pesquisar" >
+    </div>
+    <div class="col-2">
+      <button type="button" style="width: 80%;" (click)="pesquisar(pesquisa.value)" class="btn btn-success">Pesquisar</button>
+    </div>
+  </form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let c of lista">
+            <td >{{c.id}}</td>
+            <td >{{c.nomeDesc}}</td>
+        
+
+            <td><button type="button" class="btn btn-primary" (click)="editarCp(c)">Editar</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deletarCp(c)">Deletar</button></td>
+
+        </tr>
+    </tbody>

@@ -9,13 +9,13 @@ import { LoginService } from '../services/login.service';
 export class NavbarComponent {
 
 
-constructor(private loginService: LoginService){
+  constructor(private loginService: LoginService) {
 
-}
+  }
 
-deslogar(): void{
-  this.loginService.deslogarMetodo();
-}
+  deslogar(): void {
+    this.loginService.deslogarMetodo();
+  }
 
 
 }
