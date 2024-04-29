@@ -20,6 +20,13 @@ export class CategoriaProdutoComponent implements OnInit {
   categoriaProduto: CategoriaProduto
   catProdForm: FormGroup;
   pesquisa: String = '';
+  qtdPagina: Number = 0;
+  arrayNumber: Number[] = [];
+  paginaAtual: Number = 0;
+  
+  
+  
+  
   constructor(private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService, private loginService: LoginService) {
 
     this.categoriaProduto = new CategoriaProduto();
@@ -38,19 +45,23 @@ export class CategoriaProdutoComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.categoriaProdutoService.carregarCategorias().subscribe({
+      this.categoriaProdutoService.qtdPagina().subscribe({
       next: (res) => {
-        this.lista = res
-      },
 
+        this.qtdPagina = Number(res); 
+        
+        this.arrayNumber = Array(this.qtdPagina).fill(0).map((x,i) => i);
+
+        console.info(this.arrayNumber);
+     
+      },
       error: (error) => {
-        alert(error)
+
       }
     });
 
-
+    this.listaCategorias(this.paginaAtual);
   }
-
 
 
   novo(): void {
@@ -87,10 +98,10 @@ export class CategoriaProdutoComponent implements OnInit {
         if (jsonResposta.error != undefined) {
           alert(jsonResposta.error);
         } else {
-          alert('Salvo com sucesso: ID ' + jsonResposta.id)
+          alert('Salvo com sucesso, id: ' + jsonResposta.id)
         }
 
-        this.atualizarLista()
+        this.listaCategorias(this.paginaAtual);
         this.novo()
 
       },
@@ -111,7 +122,7 @@ export class CategoriaProdutoComponent implements OnInit {
 
         next: (res) => {
           alert(res);
-          this.atualizarLista()
+          
         },
 
         error: (error) => {
@@ -123,26 +134,50 @@ export class CategoriaProdutoComponent implements OnInit {
 
         }
       })
-
+      
+      this.listaCategorias(this.paginaAtual);
     }
 
   }
 
 
+  listaCategorias(pagina: Number): void{
 
-  atualizarLista() {
+    this.categoriaProdutoService.carregarCategorias(pagina).subscribe({
 
-    this.categoriaProdutoService.carregarCategorias().subscribe({
       next: (res) => {
-        this.lista = res;
+
+          this.atuliazarPagina(); 
+          this.lista = res;
       },
       error: (error) => {
-        console.error('Erro ao carregar categorias:', error);
+        alert(error);
       }
+  
     });
 
-
   }
+
+
+
+  atuliazarPagina(): void{
+    this.categoriaProdutoService.qtdPagina().subscribe({
+      next: (res) => {
+  
+        this.qtdPagina = Number(res); 
+        
+        this.arrayNumber = Array(this.qtdPagina).fill(0).map((x,i) => i);
+  
+        console.info(this.arrayNumber);
+     
+      },
+      error: (error) => {
+  
+      }
+    });
+  }
+
+
 
   buscar(id: number) {
     this.categoriaProdutoService.buscarId(id).subscribe({
@@ -159,9 +194,9 @@ export class CategoriaProdutoComponent implements OnInit {
   editarCp(c: CategoriaProduto): void {
 
     this.categoriaProdutoService.buscarId(c.id).subscribe({
-      next: (data) => {
+      next: (res) => {
 
-        this.categoriaProduto = data
+        this.categoriaProduto = res
 
 
         this.catProdForm = this.fb.group({
@@ -176,7 +211,7 @@ export class CategoriaProdutoComponent implements OnInit {
         alert(error);
       }
     });
-    this.atualizarLista();
+    this.listaCategorias(this.paginaAtual);
 
   }
 
@@ -188,7 +223,7 @@ export class CategoriaProdutoComponent implements OnInit {
       this.pesquisa = val
 
       if(val.length <= 0) {
-        this.atualizarLista();
+        this.listaCategorias(this.paginaAtual);
       }
 
      else { this.categoriaProdutoService.buscarPorDescCatgoria(this.pesquisa).subscribe({
@@ -208,6 +243,33 @@ export class CategoriaProdutoComponent implements OnInit {
       return false
   }
 
+
+  buscarPagina(p: Number): void{
+
+    this.paginaAtual = p;
+    
+    this.listaCategorias(this.paginaAtual);
+  }
+
+  voltar(): void{
+
+
+    if(this.paginaAtual.valueOf() > 0){
+      this.paginaAtual = this.paginaAtual.valueOf() - 1;
+    }
+
+    this.listaCategorias(this.paginaAtual);
+  } 
+
+  avancar(): void{
+
+     if(this.paginaAtual.valueOf() < this.qtdPagina.valueOf()){
+           this.paginaAtual = this.paginaAtual.valueOf() + 1;
+     }
+
+     this.listaCategorias(this.paginaAtual);
+
+  }
 
 
 

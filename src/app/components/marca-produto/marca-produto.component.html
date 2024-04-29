@@ -1,0 +1,81 @@
+<br>
+
+<h5 style="text-align: center;font-weight: bold;font-size: 30px;">Cadastro de marca de produto</h5>
+
+<br>
+
+<form class="row g-3" [formGroup]="marcaProdForm">
+
+    <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
+
+
+    <div class="col-2">
+        <label for="id" class="form-label">ID:</label>
+        <input type="text" class="form-control" id="id" readonly name="id" placeholder="ID" formControlName="id">
+    </div>
+    <div class="col-10">
+
+
+        <label for="nomeDesc" class="form-label">Nome da categoria</label>
+        <input type="text" maxlength="100" class="form-control" id="nomeDesc" name="nomeDesc" required
+            placeholder="Nome da categoria" formControlName="nomeDesc">
+        <div *ngIf="marcaProdForm.get('nomeDesc')?.errors" style="font-size: 8px;color: brown;">* Nome da categoria
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary"  style="margin-left: 10px; width: 80px;" [disabled]="!marcaProdForm.valid" (click)="salvar()">Salvar</button>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px; width: 80px;"
+            [disabled]="!marcaProdForm.valid" (click)="novo()" >Novo</button>
+    </div>
+</form>
+<br>
+<form class="row g-3">
+
+    <h3 for="pesquisa" class="form-label">Pesquisar a marca</h3>
+    <div class="col-10">
+        <input type="text" #pesquisa  class="form-control" id="pesquisa"
+            name="pesquisa" placeholder="Nome da categoria para pesquisar" (keydown.enter)="pesquisarMarcaPorDesc(pesquisa.value)">
+    </div>
+    <div class="col-2">
+        <button type="button" style="width: 80%;" 
+            class="btn btn-success" (click)="pesquisarMarcaPorDesc(pesquisa.value)">Pesquisar</button>
+    </div>
+</form>
+
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        <tr *ngFor="let i of listaMarca"> 
+
+            <td>{{i.id}}</td>
+            <td>{{i.nomeDesc}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="editarMarca(i)" >Editar</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deletarMarca(i)">Deletar</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link"  (click)="voltar()">Voltar</a>
+        </li>
+        <li class="page-item" *ngFor="let p of this.numeroPaginas; let i = index">
+            <a class="page-link" (click)="buscarPagina(i)" >{{i + 1}}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link"  (click)="avancar()">Avançar</a>
+        </li>
+    </ul>
+</nav>

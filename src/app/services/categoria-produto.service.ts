@@ -33,8 +33,8 @@ export class CategoriaProdutoService {
       
   }
 
-  carregarCategorias()  {
-    return this.http.get<CategoriaProduto[]>(this.urlApi + 'listarCategoria/' + this.loginService.codEmpresa());
+  carregarCategorias(pagina: Number)  {
+    return this.http.get<CategoriaProduto[]>(this.urlApi + 'listaPorPageCategoriaProduto/' + this.loginService.codEmpresa() + '/' + pagina);
 
   }
 
@@ -45,9 +45,12 @@ export class CategoriaProdutoService {
 
 buscarPorDescCatgoria(desc: String){
   return this.http.get<CategoriaProduto[]>(this.urlApi + 'buscarPorDescCategoriaEmp/' + desc +'/' + this.loginService.codEmpresa());
-
-
 }
+
+qtdPagina() {
+  return this.http.get<BigInteger>(this.urlApi + 'qtdPaginaCategoriaProduto/' + this.loginService.codEmpresa());
+}
+
 
 }
 
