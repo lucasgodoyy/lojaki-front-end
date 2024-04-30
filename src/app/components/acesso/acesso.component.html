@@ -1,10 +1,10 @@
 <br>
 
-<h5 style="text-align: center;font-weight: bold;font-size: 30px;">Cadastro de marca de produto</h5>
+<h5 style="text-align: center;font-weight: bold;font-size: 30px;">Cadastro de Acesso</h5>
 
 <br>
 
-<form class="row g-3" [formGroup]="marcaProdForm">
+<form class="row g-3" [formGroup]="acessoProdForm">
 
     <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
 
@@ -16,30 +16,30 @@
     <div class="col-10">
 
 
-        <label for="nomeDesc" class="form-label">Nome da marca</label>
+        <label for="nomeDesc" class="form-label">   Acesso</label>
         <input type="text" maxlength="100" class="form-control" id="nomeDesc" name="nomeDesc" required
-            placeholder="Nome da marca" formControlName="nomeDesc">
-        <div *ngIf="marcaProdForm.get('nomeDesc')?.errors" style="font-size: 8px;color: brown;">* Nome da marca
+            placeholder="Nome do acesso" formControlName="nomeDesc">
+        <div *ngIf="acessoProdForm.get('nomeDesc')?.errors" style="font-size: 8px;color: brown;">* Nome do acesso
         </div>
     </div>
 
     <div class="col-12">
-        <button type="submit" class="btn btn-primary"  style="margin-left: 10px; width: 80px;" [disabled]="!marcaProdForm.valid" (click)="salvar()">Salvar</button>
+        <button type="submit" class="btn btn-primary"  style="margin-left: 10px; width: 80px;" [disabled]="!acessoProdForm.valid" (click)="salvar()">Salvar</button>
         <button type="submit" class="btn btn-primary" style="margin-left: 10px; width: 80px;"
-            [disabled]="!marcaProdForm.valid" (click)="novo()" >Novo</button>
+            [disabled]="!acessoProdForm.valid" (click)="novo()" >Novo</button>
     </div>
 </form>
 <br>
 <form class="row g-3">
 
-    <h3 for="pesquisa" class="form-label">Pesquisar marca</h3>
+    <h3 for="pesquisa" class="form-label">Pesquisar acessos</h3>
     <div class="col-10">
         <input type="text" #pesquisa  class="form-control" id="pesquisa"
-            name="pesquisa" placeholder="Nome da marca para pesquisar" (keydown.enter)="pesquisarMarcaPorDesc(pesquisa.value)">
+            name="pesquisa" placeholder="Nome do acesso para pesquisar" (keydown.enter)="pesquisarAcessoPorDesc(pesquisa.value)">
     </div>
     <div class="col-2">
         <button type="button" style="width: 80%;" 
-            class="btn btn-success" (click)="pesquisarMarcaPorDesc(pesquisa.value)">Pesquisar</button>
+            class="btn btn-success" (click)="pesquisarAcessoPorDesc(pesquisa.value)">Pesquisar</button>
     </div>
 </form>
 
@@ -59,9 +59,9 @@
         <tr *ngFor="let i of listaMarca"> 
 
             <td>{{i.id}}</td>
-            <td>{{i.nomeDesc}}</td>
-            <td><button type="button" class="btn btn-primary" (click)="editarMarca(i)" >Editar</button></td>
-            <td><button type="button" class="btn btn-danger" (click)="deletarMarca(i)">Deletar</button></td>
+            <td>{{i.descricao}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="editarAcesso(i)" >Editar</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deletarAcesso(i)">Deletar</button></td>
         </tr>
     </tbody>
 </table>
