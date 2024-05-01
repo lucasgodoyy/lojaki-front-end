@@ -1,0 +1,153 @@
+<br>
+
+<h5 style="text-align: center;font-weight: bold;font-size: 30px;">Cadastro de Empresa</h5>
+
+<br>
+
+<form class="row g-3">  <!--  [formGroup]="marcaProdForm"             formControlName="empresa"            formControlName="nomeDesc" -->
+
+    <input type="hidden" id="empresa" name="empresa" >
+
+
+    <div class="col-1">
+        <label for="id" class="form-label">ID:</label>
+        <input type="text" class="form-control" id="id" readonly name="id" placeholder="ID" >
+    </div>
+
+    <div class="col-3">
+        <label for="nome" class="form-label">Nome: </label>
+        <input type="text" maxlength="100" class="form-control" id="nomeDesc" name="nome" required
+            placeholder="Preencha seu nome completo" >
+        <div style="font-size: 8px;color: brown;">* Nome
+        </div>
+    </div>
+
+    <div class="col-3">
+        <label for="email" class="form-label">Email: </label>
+        <input type="text" maxlength="100" class="form-control" id="email" name="email" required
+            placeholder="Preencha seu melhor email" >
+        <div style="font-size: 8px;color: brown;">* Email
+        </div>
+    </div>
+
+    <div class="col-3">
+        <label for="telefone" class="form-label">Telefone: </label>
+        <input type="text" maxlength="100" class="form-control" id="telefone" name="telefone" required
+            placeholder="Telefone" >
+        <div style="font-size: 8px;color: brown;">* Telefone
+        </div>
+    </div>
+
+    <div class="col-2"> </div>
+
+    <div class="col-2">
+        <label for="cnpj" class="form-label">CNPJ: </label>
+        <input type="text" maxlength="100" class="form-control" id="cnpj" name="cnpj" required
+            placeholder="CNPJ" >
+        <div style="font-size: 8px;color: brown;">* CNPJ
+        </div>
+    </div>
+
+    <div class="col-2">
+        <label for="inscricaoEstadual" class="form-label">Inscrição Estadual: </label>
+        <input type="text" maxlength="100" class="form-control" id="inscricaoEstadual" 
+                name="inscricaoEstadual" required placeholder="Inscrição Estadual" >
+        <div style="font-size: 8px;color: brown;">* Inscrição estadual
+        </div>
+    </div>
+
+
+    <div class="col-2">
+        <label for="inscricaoMunicipal" class="form-label">Inscrição Municipal: </label>
+        <input type="text" maxlength="100" class="form-control" id="inscricaoMunicipal" 
+                name="inscricaoMunicipal" required placeholder="Inscrição Municipal" >
+        <div style="font-size: 8px;color: brown;">* Inscrição municipal
+        </div>
+    </div>
+
+
+    <div class="col-2">
+        <label for="nomeFantasia" class="form-label">Nome Fantasia: </label>
+        <input type="text" maxlength="100" class="form-control" id="nomeFantasia" 
+                name="nomeFantasia" required placeholder="Nome Fantasia" >
+        <div style="font-size: 8px;color: brown;">* Nome Fantasia
+        </div>
+    </div>
+
+    <div class="col-2">
+        <label for="razaoSocial" class="form-label">Razão Social: </label>
+        <input type="text" maxlength="100" class="form-control" id="razaoSocial" 
+                name="razaoSocial" required placeholder="Razão Social" >
+        <div style="font-size: 8px;color: brown;">* Razão Social
+        </div>
+    </div>
+
+
+    <div class="col-2">
+        <label for="categoria" class="form-label">Categoria: </label>
+        <input type="text" maxlength="100" class="form-control" id="categoria" 
+                name="categoria" required placeholder="Digite a área de atuação" >
+        <div style="font-size: 8px;color: brown;">* Categoria
+        </div>
+    </div>
+
+
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary"  style="margin-left: 10px; width: 80px;" >Salvar</button>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px; width: 80px;"
+             >Novo</button>
+    </div>
+</form>
+<br>
+<form class="row g-3">
+
+    <h3 for="pesquisa" class="form-label">Pesquisar marca</h3>
+    <div class="col-10">
+        <input type="text" #pesquisa  class="form-control" id="pesquisa"
+            name="pesquisa" placeholder="Nome da marca para pesquisar" >
+    </div>
+    <div class="col-2">
+        <button type="button" style="width: 80%;" 
+            class="btn btn-success">Pesquisar</button>
+    </div>
+</form>
+
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome Fantasia</th>
+            <th scope="col">CNPJ</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+            <th scope="col">Dados Completos</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        <tr *ngFor="let i of listaEmpresa"> 
+            <td>{{i.id}}</td>
+            <td>{{i.nomeFantasia}}</td>
+            <td>{{i.cnpj}}</td>
+            <td><button type="button" class="btn btn-primary">Editar</button></td>
+            <td><button type="button" class="btn btn-danger">Deletar</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" >Voltar</a>
+        </li>
+        <li *ngFor="let i of this.arrayPagina; let valor = index" class="page-item">
+            <a class="page-link" >{{valor + 1}}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link">Avançar</a>
+        </li>
+    </ul>
+</nav>

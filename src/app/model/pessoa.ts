@@ -7,7 +7,6 @@ export class  Pessoa {
     nome?: String;
     email?: String;
     telefone?:String;
-    tipoPessoa?: String;
     empresa?: PessoaJuridica;
 
     constructor(){       

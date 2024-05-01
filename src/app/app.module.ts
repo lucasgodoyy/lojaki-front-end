@@ -16,6 +16,8 @@ import { CategoriaProdutoService } from './services/categoria-produto.service';
 import { LoginService } from './services/login.service';
 import { MarcaProdutoComponent } from './components/marca-produto/marca-produto.component';
 import { AcessoComponent } from './components/acesso/acesso.component';
+import { PessoaJuridicaComponent } from './components/pessoa-juridica/pessoa-juridica.component';
+import { PessoaJuridica } from './model/pessoa-juridica';
 
 
 
@@ -29,6 +31,7 @@ export const appRoutes : Routes = [
 {path: 'categoria-produto', component: CategoriaProdutoComponent, canActivate:[guardianGuard], data: {role:['ROLE_ADMIN','ROLE_USER']}},
 {path: 'marca-produto', component: MarcaProdutoComponent, canActivate:[guardianGuard], data: {role:['ROLE_ADMIN','ROLE_USER']}},
 {path: 'acesso', component: AcessoComponent, canActivate:[guardianGuard], data: {role:['ROLE_ADMIN','ROLE_USER']}},
+{path: 'pessoa-juridica', component: PessoaJuridicaComponent, canActivate:[guardianGuard], data: {role:['ROLE_ADMIN','ROLE_USER']}},
 
 
 ];
@@ -43,7 +46,8 @@ export const routes = RouterModule.forRoot(appRoutes)
     NavbarComponent,
     CategoriaProdutoComponent,
     MarcaProdutoComponent,
-    AcessoComponent
+    AcessoComponent,
+    PessoaJuridicaComponent,
 
   ],
   imports: [
