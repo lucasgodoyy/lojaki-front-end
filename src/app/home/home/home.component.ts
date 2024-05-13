@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
     
-    this.router.navigate(['/pessoa-juridica']);
+    this.router.navigate(['/pessoa-fisica']);
 
   }
 

@@ -13,20 +13,37 @@ export class LoginService {
 
   private urlLogar = environment.urlApiLocal + 'login';
   private urlRecuperarSenha = environment.urlApiLocal + 'recuperarSenha';
+  private numeroEmpresa: Number
 
   constructor(private http: HttpClient, private router: Router) {
-
+  this.numeroEmpresa = 0
   }
 
   codEmpresa(){
     return localStorage.getItem('Empresa');
   }
 
-
   objetoEmpresa(): PessoaJuridica{
-    return new PessoaJuridica(Number(this.codEmpresa()));
-    
+
+    var p = new PessoaJuridica();
+    p.id = Number(this.codEmpresa());
+  
+    return p;
   }
+
+ /* objetoEmpresa(): PessoaJuridica | null{
+    const idEmpresa = this.codEmpresa(); // Supondo que codEmpresa() retorne um número
+    
+    if (idEmpresa !== null) {
+      return new PessoaJuridica(Number(idEmpresa));
+  } else {
+      return null;
+  }
+    
+}*/
+
+
+
 
 
 

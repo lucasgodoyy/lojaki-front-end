@@ -16,14 +16,28 @@ export class PessoaJuridicaService {
 
 
   qtdPaginaEmpresa(){
-
     return this.http.get<Number>(this.urlApi + 'qtdPaginaEmpresa')
 
   }
 
   listaEmpresaByPagina(pagina: Number){
-
     return this.http.get<PessoaJuridica[]>(this.urlApi + 'listaEmpresaByPagina/' + pagina)
+
+  }
+
+  deletarEmpresa(empresa: PessoaJuridica){
+    return this.http.post(this.urlApi + 'deletePessoaJuridica/', empresa, { responseType: 'text' })
+
+  }
+
+
+  desativarEmpresa(empresa: PessoaJuridica){
+    return this.http.post(this.urlApi + 'desativarPessoaJuridica/', empresa, { responseType: 'text' })
+
+  }
+
+  salvarJuridica(empresa: PessoaJuridica){
+    return this.http.post<PessoaJuridica>(this.urlApi + 'salvarEmpresaNova/', empresa)
 
   }
 

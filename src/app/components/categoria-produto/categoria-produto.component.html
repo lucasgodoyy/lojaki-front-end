@@ -73,13 +73,13 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item">
-            <a class="page-link" (click)="voltar()">Voltar</a>
+            <a href="#" class="page-link" (click)="voltar()">Voltar</a>
         </li>
         <li class="page-item" *ngFor="let p of this.arrayNumber; let i = index">
-            <a class="page-link" (click)="buscarPagina(i)">{{(i + 1)}}</a>
+            <a href="#" class="page-link" (click)="buscarPagina(i)">{{(i + 1)}}</a>
         </li>
         <li class="page-item">
-            <a class="page-link" (click)="avancar()">Avançar</a>
+            <a href="#" class="page-link" (click)="avancar()">Avançar</a>
         </li>
-    </ul>
+    </ul> 
 </nav>

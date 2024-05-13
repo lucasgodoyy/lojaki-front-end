@@ -1,0 +1,137 @@
+<br>
+
+<h5 style="text-align: center;font-weight: bold;font-size: 30px;">Cadastro de Pessoa Física</h5>
+
+<br>
+
+<form class="row g-3" [formGroup]="formPessoaFisica">  <!--  [formGroup]="marcaProdForm"             formControlName="empresa"            formControlName="nomeDesc" -->
+
+    <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
+
+
+    <div class="col-1">
+        <label for="id" class="form-label">ID:</label>
+        <input type="text" class="form-control" id="id" readonly name="id" placeholder="ID" formControlName="id">
+    </div>
+
+    <div class="col-3">
+        <label for="nome" class="form-label">Nome: </label>
+        <input type="text" maxlength="100" class="form-control" id="nomeDesc" name="nome" required formControlName="nome"
+            placeholder="Preencha seu nome completo" >
+        <div *ngIf="formPessoaFisica.get('nome')?.errors" style="font-size: 8px;color: brown;">* Nome
+        </div>
+    </div>
+
+    <div class="col-3">
+        <label for="email" class="form-label">Email: </label>
+        <input type="text" maxlength="100" class="form-control" id="email" name="email" required formControlName="email"
+        
+        placeholder="Preencha seu melhor email" >
+        <div *ngIf="formPessoaFisica.get('email')?.errors" style="font-size: 8px;color: brown;">
+            Email inválido
+          </div>
+    
+    </div>
+
+    <div class="col-3">
+        <label for="telefone" class="form-label">Telefone: </label>
+        <input type="text" maxlength="100" class="form-control" id="telefone" name="telefone" required formControlName="telefone"
+        mask="(00) 0 0000-0000" placeholder="Telefone" >
+        <div *ngIf="formPessoaFisica.get('telefone')?.errors" style="font-size: 8px;color: brown;">* Telefone
+        </div>
+    </div>
+
+    <div class="col-2"> </div>
+
+    <div class="col-1">
+        <label for="empresa" class="form-label">Empresa: </label>
+        <input type="text" maxlength="100" class="form-control" readonly id="empresa" name="empresa" required formControlName="empresa"
+            placeholder="ID " >
+        <div *ngIf="formPessoaFisica.get('empresa')?.errors" style="font-size: 8px;color: brown;">* Empresa
+        </div>
+    </div>
+
+    <div class="col-2">
+        <label for="cpf" class="form-label">CPF: </label>
+        <input type="text" maxlength="100" class="form-control" id="cpf" 
+                name="cpf" required formControlName="cpf" placeholder="Preencha seu cpf"
+                mask="000.000.000-00">
+        <div *ngIf="formPessoaFisica.get('cpf')?.errors" style="font-size: 8px;color: brown;">* CPF
+        </div>
+    </div>
+
+
+    <div class="col-2">
+        <label for="dataNascimento" class="form-label">Data Nascimento: </label>
+        <input type="text" maxlength="100" class="form-control" id="dataNascimento" 
+                name="dataNascimento" required formControlName="dataNascimento" 
+                mask="00/00/0000"  placeholder="Data de Nascimento">
+        <div *ngIf="formPessoaFisica.get('dataNascimento')?.errors" style="font-size: 8px;color: brown;">* Data Nascimento
+        </div>
+    </div>
+
+
+
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary"  style="margin-left: 10px; width: 80px;" (click)="salvar()" >Salvar</button>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px; width: 80px;"
+             (click)="novo()">Novo</button>
+    </div>
+</form>
+<br>
+<form class="row g-3">
+
+    <h3 for="pesquisa" class="form-label">Pesquisar pessoa física</h3>
+    <div class="col-10">
+        <input type="text" #pesquisa  class="form-control" id="pesquisa"
+            name="pesquisa" placeholder="Nome da pessoa física para pesquisar" >
+    </div>
+    <div class="col-2">
+        <button type="button" style="width: 80%;" 
+            class="btn btn-success">Pesquisar</button>
+    </div>
+</form>
+
+<br>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Desativar</th>
+            <th scope="col">Deletar</th>
+            <th scope="col">Dados Completos</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        <tr  *ngFor="let i of listaPessoaFisica"> 
+            <td>{{i.id}}</td>
+            <td>{{i.nome}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.cpf}}</td>
+            <td><button type="button" class="btn btn-primary"(click)=" editar(i)">Editar</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="desativar(i)">Desativar</button></td>
+            <td><button type="button" class="btn btn-danger" >Deletar</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" >Voltar</a>
+        </li>
+        <li *ngFor="let i of this.numberArrayPagina; let numPagina = index" class="page-item" >
+            <a class="page-link" (click)="buscarPorPagina(numPagina)" >{{numPagina + 1}} </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link">Avançar</a>
+        </li>
+    </ul>
+</nav>
